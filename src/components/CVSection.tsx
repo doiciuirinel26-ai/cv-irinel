@@ -3,6 +3,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ProjectWheelSection } from './project-wheel/ProjectWheelSection'
 import { ContactCTA } from './ContactCTA'
+import { AboutSection } from './AboutSection'
+import { FAQSection } from './FAQSection'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -60,6 +62,46 @@ export function CVSection() {
         scrollTrigger: {
           trigger: '[data-section="projects"]',
           start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+
+      gsap.from('[data-animate="about-bio"]', {
+        opacity: 0,
+        y: 36,
+        duration: 0.85,
+        ease: 'power3.out',
+        stagger: 0.14,
+        scrollTrigger: {
+          trigger: '[data-section="about"]',
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+
+      gsap.from('[data-animate="about-fact"]', {
+        opacity: 0,
+        y: 20,
+        scale: 0.96,
+        duration: 0.6,
+        ease: 'back.out(1.4)',
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: '[data-section="about"]',
+          start: 'top 70%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+
+      gsap.from('[data-animate="faq-item"]', {
+        opacity: 0,
+        y: 24,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: '[data-section="faq"]',
+          start: 'top 78%',
           toggleActions: 'play none none reverse',
         },
       })
@@ -125,7 +167,13 @@ export function CVSection() {
             <ProjectWheelSection />
           </div>
         </div>
+      </div>
 
+      <AboutSection />
+
+      <FAQSection />
+
+      <div className="relative mx-auto max-w-5xl">
         <footer
           className="mt-20 border-t border-white/5 pt-10 text-center"
           data-animate="fade-up"
