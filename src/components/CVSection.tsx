@@ -2,6 +2,7 @@ import { useRef, useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ProjectWheelSection } from './project-wheel/ProjectWheelSection'
+import { ContactCTA } from './ContactCTA'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -90,6 +91,7 @@ export function CVSection() {
           >
             Full Stack Developer &amp; AI Engineer
           </p>
+          <ContactCTA />
         </header>
 
         <div className="mb-16 md:mb-20" data-section="skills">
