@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './CustomCursor.css'
 
-const CURSOR_LERP = 0.16
+const CURSOR_LERP = 0.85
 const MAX_PARTICLES = 120
 const INTERACTIVE_SELECTOR =
   'a, button, input, textarea, select, label, [role="button"], [role="link"]'
