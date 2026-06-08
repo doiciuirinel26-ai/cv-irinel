@@ -436,6 +436,61 @@
     color: #c4b5fd;
     text-decoration: underline;
   }
+
+  @media (max-width: 768px) {
+    .project-phone-overlay {
+      align-items: flex-start;
+      padding: 3.25rem 0.5rem 1rem;
+    }
+
+    .project-phone-close {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+
+    .project-phone-stage {
+      width: min(100%, 96vw);
+      max-height: none;
+      margin-top: 0.25rem;
+    }
+
+    .project-phone-frame {
+      padding: 0.4rem;
+      border-radius: 2rem;
+    }
+
+    .project-phone-bezel {
+      border-radius: 1.6rem;
+    }
+
+    .project-phone-notch {
+      top: 0.35rem;
+      width: 30%;
+      height: 1rem;
+    }
+
+    .project-phone-screen {
+      width: 100%;
+      max-height: min(78dvh, 820px);
+      aspect-ratio: 9 / 18.5;
+      padding-top: 1.35rem;
+    }
+
+    .project-phone-iframe,
+    .project-phone-loading {
+      top: 1.35rem;
+      height: calc(100% - 1.35rem);
+    }
+
+    .project-phone-home-bar {
+      bottom: 0.35rem;
+      height: 0.22rem;
+    }
+
+    .project-phone-meta {
+      display: none;
+    }
+  }
 }
 
 @keyframes project-phone-spin {

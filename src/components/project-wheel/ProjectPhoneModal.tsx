@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import gsap from 'gsap'
 import type { Project } from '../../data/projects'
+import { isMobileViewport } from '../../utils/isMobileViewport'
 
 type ProjectPhoneModalProps = {
   project: Project | null
@@ -38,6 +39,8 @@ export function ProjectPhoneModal({ project, onClose }: ProjectPhoneModalProps) 
     const closeBtn = closeRef.current
     if (!overlay || !phone || !closeBtn) return
 
+    const mobile = isMobileViewport()
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         overlay,
@@ -49,14 +52,14 @@ export function ProjectPhoneModal({ project, onClose }: ProjectPhoneModalProps) 
         phone,
         {
           opacity: 0,
-          y: 80,
-          scale: 0.72,
-          rotateY: -28,
-          rotateX: 8,
+          y: mobile ? 40 : 80,
+          scale: mobile ? 0.88 : 0.72,
+          rotateY: mobile ? -12 : -28,
+          rotateX: mobile ? 4 : 8,
         },
         {
           opacity: 1,
-          y: 36,
+          y: mobile ? 8 : 36,
           scale: 1,
           rotateY: 0,
           rotateX: 0,
