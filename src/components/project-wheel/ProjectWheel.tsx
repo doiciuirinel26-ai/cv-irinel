@@ -15,10 +15,11 @@ type ProjectWheelProps = {
 export function ProjectWheel({ className = '' }: ProjectWheelProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const dragState = useRef(createInitialDragState())
+  const wheelRotation = useRef(0)
   const modalOpen = selectedProject !== null
 
   return (
-    <WheelInteractionProvider dragState={dragState}>
+    <WheelInteractionProvider dragState={dragState} wheelRotation={wheelRotation}>
       <div
         className={`project-wheel-wrap ${modalOpen ? 'project-wheel-wrap--dimmed' : ''} ${className}`}
       >

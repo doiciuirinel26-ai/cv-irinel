@@ -1,10 +1,11 @@
 import { Billboard, Html } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useRef, type CSSProperties } from 'react'
-import { AdditiveBlending, type Mesh, type MeshBasicMaterial } from 'three'
+import { AdditiveBlending, type Group, type Mesh, type MeshBasicMaterial } from 'three'
 import type { Project } from '../../data/projects'
 import {
   CLICK_THRESHOLD,
+  useWheelInteraction,
   WHEEL_RADIUS,
 } from './wheelContext'
 
@@ -21,15 +22,25 @@ export function ProjectWheelNode({
   total,
   onSelect,
 }: ProjectWheelNodeProps) {
+  const groupRef = useRef<Group>(null)
   const glowRef = useRef<Mesh>(null)
   const pointerStart = useRef(0)
   const pointerMoved = useRef(false)
+  const { wheelRotation } = useWheelInteraction()
 
-  const angle = (index / total) * Math.PI * 2
-  const x = Math.sin(angle) * WHEEL_RADIUS
-  const z = Math.cos(angle) * WHEEL_RADIUS
+  const baseAngle = (index / total) * Math.PI * 2
+  const floatY = Math.sin(index * 1.4) * 0.15
 
   useFrame(({ clock }) => {
+    if (groupRef.current) {
+      const angle = baseAngle + wheelRotation.current
+      groupRef.current.position.set(
+        Math.sin(angle) * WHEEL_RADIUS,
+        floatY,
+        Math.cos(angle) * WHEEL_RADIUS,
+      )
+    }
+
     if (!glowRef.current) return
     const pulse = 0.12 + Math.sin(clock.elapsedTime * 1.6 + index) * 0.04
     glowRef.current.scale.setScalar(1 + Math.sin(clock.elapsedTime * 1.2 + index) * 0.03)
@@ -54,23 +65,22 @@ export function ProjectWheelNode({
   }
 
   return (
-    <group position={[x, Math.sin(index * 1.4) * 0.15, z]}>
-      <mesh ref={glowRef} position={[0, 0, -0.08]}>
-        <planeGeometry args={[2.6, 1.65]} />
-        <meshBasicMaterial
-          color={project.color}
-          transparent
-          opacity={0.12}
-          depthWrite={false}
-          blending={AdditiveBlending}
-        />
-      </mesh>
-
+    <group ref={groupRef}>
       <pointLight color={project.color} intensity={0.35} distance={3} decay={2} />
 
-      <Billboard follow lockX lockZ>
+      <Billboard follow>
+        <mesh ref={glowRef} position={[0, 0, -0.08]}>
+          <planeGeometry args={[2.6, 1.65]} />
+          <meshBasicMaterial
+            color={project.color}
+            transparent
+            opacity={0.12}
+            depthWrite={false}
+            blending={AdditiveBlending}
+          />
+        </mesh>
+
         <Html
-          transform
           center
           distanceFactor={5.5}
           zIndexRange={[100, 0]}

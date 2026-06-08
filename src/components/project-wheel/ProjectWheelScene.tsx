@@ -1,6 +1,5 @@
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
-import type { Group } from 'three'
 import type { Project } from '../../data/projects'
 import { ProjectWheelNode } from './ProjectWheelNode'
 import {
@@ -21,10 +20,8 @@ export function ProjectWheelScene({
   onSelect,
   paused,
 }: ProjectWheelSceneProps) {
-  const wheelRef = useRef<Group>(null)
-  const rotation = useRef(0)
   const velocity = useRef(0)
-  const { dragState } = useWheelInteraction()
+  const { dragState, wheelRotation } = useWheelInteraction()
   const { gl } = useThree()
 
   useEffect(() => {
@@ -49,10 +46,7 @@ export function ProjectWheelScene({
       }
 
       const step = deltaX * DRAG_SENSITIVITY
-      rotation.current += step
-      if (wheelRef.current) {
-        wheelRef.current.rotation.y = rotation.current
-      }
+      wheelRotation.current += step
 
       dragState.current.startX = event.clientX
       velocity.current = step
@@ -78,12 +72,11 @@ export function ProjectWheelScene({
   }, [dragState, gl.domElement])
 
   useFrame(() => {
-    if (paused || dragState.current.active || !wheelRef.current) return
+    if (paused || dragState.current.active) return
     if (Math.abs(velocity.current) < 0.0001) return
 
-    rotation.current += velocity.current
+    wheelRotation.current += velocity.current
     velocity.current *= INERTIA_DAMPING
-    wheelRef.current.rotation.y = rotation.current
   })
 
   return (
@@ -101,7 +94,7 @@ export function ProjectWheelScene({
         <meshBasicMaterial color="#6366f1" transparent opacity={0.06} />
       </mesh>
 
-      <group ref={wheelRef}>
+      <group>
         {projects.map((project, index) => (
           <ProjectWheelNode
             key={project.id}

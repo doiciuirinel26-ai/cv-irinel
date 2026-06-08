@@ -8,6 +8,7 @@ export type WheelDragState = {
 
 type WheelInteractionContextValue = {
   dragState: MutableRefObject<WheelDragState>
+  wheelRotation: MutableRefObject<number>
 }
 
 const WheelInteractionContext = createContext<WheelInteractionContextValue | null>(
@@ -17,12 +18,14 @@ const WheelInteractionContext = createContext<WheelInteractionContextValue | nul
 export function WheelInteractionProvider({
   children,
   dragState,
+  wheelRotation,
 }: {
   children: ReactNode
   dragState: MutableRefObject<WheelDragState>
+  wheelRotation: MutableRefObject<number>
 }) {
   return (
-    <WheelInteractionContext.Provider value={{ dragState }}>
+    <WheelInteractionContext.Provider value={{ dragState, wheelRotation }}>
       {children}
     </WheelInteractionContext.Provider>
   )

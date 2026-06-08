@@ -41,6 +41,36 @@
     overscroll-behavior: none;
   }
 
+  .hero-section {
+    height: 100vh;
+    min-height: 100vh;
+    height: 100dvh;
+    min-height: 100dvh;
+    touch-action: pan-y;
+  }
+
+  .hero-section--mobile {
+    height: 88dvh;
+    min-height: 88dvh;
+  }
+
+  .hero-section--mobile .hero-scene-canvas {
+    pointer-events: none;
+    touch-action: pan-y;
+  }
+
+  .hero-section--mobile.hero-section--rotation-complete {
+    touch-action: auto;
+  }
+
+  body.hero-scroll-locked .hero-section--mobile {
+    touch-action: pan-y;
+  }
+
+  .hero-section--mobile .hero-scroll-hint::after {
+    content: ' · swipe up';
+  }
+
   #root {
     width: 100%;
     min-height: 100vh;

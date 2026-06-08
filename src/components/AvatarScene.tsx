@@ -37,7 +37,7 @@ export function AvatarScene() {
   return (
     <>
       <Canvas
-        className="!absolute inset-0 h-full w-full touch-none"
+        className="hero-scene-canvas !absolute inset-0 h-full w-full touch-none"
         frameloop="always"
         camera={{ position: [0, 1.16, 3.55], fov: 45, near: 0.1, far: 100 }}
         dpr={[1, 2]}
