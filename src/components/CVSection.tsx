@@ -93,6 +93,18 @@ export function CVSection() {
         },
       })
 
+      gsap.from('[data-animate="about-note"]', {
+        opacity: 0,
+        y: 28,
+        duration: 0.85,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '[data-section="about"]',
+          start: 'top 65%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+
       gsap.from('[data-animate="faq-item"]', {
         opacity: 0,
         y: 24,

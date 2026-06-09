@@ -71,6 +71,13 @@ export function AboutSection() {
             ))}
           </ul>
         </div>
+
+        <p className="about-section__note" data-animate="about-note">
+          I enjoy technically challenging projects and learning new technologies.
+          If a project presents an interesting problem to solve, I&apos;m often
+          willing to explore unfamiliar tools and stacks to find the best
+          solution.
+        </p>
       </div>
     </section>
   )

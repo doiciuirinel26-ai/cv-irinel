@@ -308,6 +308,23 @@
       0 0 0 1px rgb(255 255 255 / 0.12);
   }
 
+  .about-section__note {
+    margin: 2rem auto 0;
+    max-width: 42rem;
+    text-align: center;
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: #a1a1aa;
+  }
+
+  @media (min-width: 768px) {
+    .about-section__note {
+      margin-top: 2.5rem;
+      max-width: 48rem;
+      font-size: 1.05rem;
+    }
+  }
+
   .faq-section {
     width: 100%;
     margin-top: 5rem;
